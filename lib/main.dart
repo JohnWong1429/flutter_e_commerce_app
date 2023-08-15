@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_keyboard_visibility/flutter_keyboard_visibility.dart';
+import 'package:my_e_commerce_app/content_page.dart';
 import 'package:my_e_commerce_app/login_page.dart';
 
 void main() {
@@ -19,6 +20,10 @@ class MyApp extends StatelessWidget {
           primarySwatch: Colors.blue,
         ),
         home: const LoginPage(),
+        routes: {
+          ContentPage.routeName: (_) => const ContentPage(),
+          LoginPage.routeName: (_) => const LoginPage(),
+        },
       ),
     );
   }

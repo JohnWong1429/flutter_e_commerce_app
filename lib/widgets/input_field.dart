@@ -4,12 +4,14 @@ class InputField extends StatefulWidget {
   final TextEditingController? controller;
   final String? labelText;
   final bool hidePassword;
+  final bool hasError;
 
   const InputField({
     super.key,
     this.controller,
     this.labelText,
     this.hidePassword = false,
+    this.hasError = false,
   });
 
   @override

@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:my_e_commerce_app/content_page.dart';
+import 'package:my_e_commerce_app/services/api_call.dart';
 import 'package:my_e_commerce_app/widgets/input_field.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({super.key});
+  static const routeName = 'login_page';
 
   @override
   State<LoginPage> createState() => _LoginPageState();
@@ -11,6 +14,7 @@ class LoginPage extends StatefulWidget {
 class _LoginPageState extends State<LoginPage> {
   late TextEditingController _username;
   late TextEditingController _password;
+  bool _hasError = false;
 
   @override
   void initState() {
@@ -56,6 +60,7 @@ class _LoginPageState extends State<LoginPage> {
             InputField(
               labelText: 'Enter your username',
               controller: _username,
+              hasError: _hasError,
             ),
             const SizedBox(
               height: 20,
@@ -64,6 +69,7 @@ class _LoginPageState extends State<LoginPage> {
               labelText: 'Enter your password',
               controller: _password,
               hidePassword: true,
+              hasError: _hasError,
             ),
             const SizedBox(
               height: 20,
@@ -89,7 +95,15 @@ class _LoginPageState extends State<LoginPage> {
                     ),
                   ),
                 ),
-                onPressed: () {},
+                onPressed: () async {
+                  final result =
+                      await CallApi.fetchUsers(_username.text, _password.text);
+                  if (context.mounted && result == null) {
+                    Navigator.of(context).pushNamed(ContentPage.routeName);
+                  } else {
+                    _hasError = true;
+                  }
+                },
                 child: const Text(
                   'Log In',
                   style: TextStyle(
@@ -105,8 +119,13 @@ class _LoginPageState extends State<LoginPage> {
               mainAxisAlignment: MainAxisAlignment.end,
               children: [
                 InkWell(
-                  onTap: () {},
-                  splashColor: Color.fromARGB(255, 215, 232, 240),
+                  onTap: () {
+                    setState(() {
+                      _username.text = 'kminchelle';
+                      _password.text = '0lelplR';
+                    });
+                  },
+                  splashColor: const Color.fromARGB(255, 232, 237, 241),
                   child: RichText(
                     text: const TextSpan(
                       children: [

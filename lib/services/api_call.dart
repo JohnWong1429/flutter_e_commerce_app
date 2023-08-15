@@ -19,7 +19,7 @@ class CallApi {
     if (response.statusCode == 201) {
       return ApiLoginUserDataModel.fromJson(json.decode(response.body));
     } else {
-      throw Exception('Failed to fetch user data');
+      return null;
     }
   }
 }
