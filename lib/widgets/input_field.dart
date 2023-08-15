@@ -5,9 +5,11 @@ class InputField extends StatefulWidget {
   final String? labelText;
   final bool hidePassword;
   final bool hasError;
-  final Function(String?)? onChange;
+  final Function(String)? onChange;
   final String? errorText;
   final bool isEnable;
+  final Widget? suffix;
+  final BoxConstraints? suffixIconConstraints;
 
   const InputField({
     super.key,
@@ -18,6 +20,8 @@ class InputField extends StatefulWidget {
     this.onChange,
     this.errorText,
     this.isEnable = true,
+    this.suffix,
+    this.suffixIconConstraints,
   });
 
   @override
@@ -27,14 +31,31 @@ class InputField extends StatefulWidget {
 class _InputFieldState extends State<InputField> {
   late TextEditingController _controller;
 
+  late bool _showClearButton;
+
   @override
   void initState() {
     super.initState();
     _controller = widget.controller ?? TextEditingController();
+    _showClearButton = _controller.text.isNotEmpty;
+    _controller.addListener(_listener);
+  }
+
+  void _listener() {
+    if (_showClearButton && _controller.text.isEmpty) {
+      setState(() {
+        _showClearButton = false;
+      });
+    } else if (!_showClearButton && _controller.text.isNotEmpty) {
+      setState(() {
+        _showClearButton = true;
+      });
+    }
   }
 
   @override
   void dispose() {
+    _controller.removeListener(_listener);
     if (widget.controller == null) {
       _controller.dispose();
     }
@@ -49,6 +70,19 @@ class _InputFieldState extends State<InputField> {
           controller: _controller,
           enabled: widget.isEnable,
           decoration: InputDecoration(
+            suffix: _controller.text.isNotEmpty
+                ? IconButton(
+                    onPressed: () {
+                      _controller.clear();
+                    },
+                    icon: const Icon(
+                      Icons.cancel,
+                      color: Colors.grey,
+                    ),
+                    iconSize: 20,
+                  )
+                : widget.suffix,
+            suffixIconConstraints: widget.suffixIconConstraints,
             labelText: widget.labelText,
             labelStyle: TextStyle(
               fontSize: 20,
@@ -69,7 +103,7 @@ class _InputFieldState extends State<InputField> {
               ),
             ),
             contentPadding: const EdgeInsets.symmetric(
-              vertical: 10,
+              vertical: 0,
             ),
           ),
           obscureText: widget.hidePassword,
