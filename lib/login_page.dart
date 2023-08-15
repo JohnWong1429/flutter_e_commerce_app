@@ -15,6 +15,7 @@ class _LoginPageState extends State<LoginPage> {
   late TextEditingController _username;
   late TextEditingController _password;
   bool _hasError = false;
+  bool _isloading = false;
 
   @override
   void initState() {
@@ -69,6 +70,7 @@ class _LoginPageState extends State<LoginPage> {
                     });
                   }
                 },
+                isEnable: !_isloading,
               ),
               const SizedBox(
                 height: 20,
@@ -86,6 +88,7 @@ class _LoginPageState extends State<LoginPage> {
                   }
                 },
                 errorText: 'Incorrect username or password',
+                isEnable: !_isloading,
               ),
               const SizedBox(
                 height: 20,
@@ -95,13 +98,13 @@ class _LoginPageState extends State<LoginPage> {
                 child: ElevatedButton(
                   style: ButtonStyle(
                     backgroundColor: MaterialStateProperty.all(
-                      Colors.blueAccent,
+                      _isloading ? Colors.grey : Colors.blueAccent,
                     ),
                     foregroundColor: MaterialStateProperty.all(
                       Colors.white,
                     ),
                     overlayColor: MaterialStateProperty.all(
-                      const Color.fromARGB(255, 90, 169, 238),
+                      Colors.grey,
                     ),
                     shape: MaterialStateProperty.all<RoundedRectangleBorder>(
                       RoundedRectangleBorder(
@@ -111,24 +114,47 @@ class _LoginPageState extends State<LoginPage> {
                       ),
                     ),
                   ),
-                  onPressed: () async {
-                    FocusScope.of(context).unfocus();
-                    final result = await CallApi.fetchUsers(
-                        _username.text, _password.text);
-                    if (context.mounted && result != null) {
-                      Navigator.of(context).pushNamed(ContentPage.routeName);
-                    } else {
-                      setState(() {
-                        _hasError = true;
-                      });
-                    }
-                  },
-                  child: const Text(
-                    'Log In',
-                    style: TextStyle(
-                      fontSize: 16,
-                    ),
-                  ),
+                  onPressed: _isloading
+                      ? null
+                      : () async {
+                          setState(() {
+                            _hasError = false;
+                            _isloading = true;
+                          });
+                          FocusScope.of(context).unfocus();
+                          final result = await CallApi.fetchUsers(
+                              _username.text, _password.text);
+                          if (context.mounted) {
+                            setState(() {
+                              _isloading = false;
+                            });
+                            if (result != null) {
+                              Navigator.of(context)
+                                  .pushNamed(ContentPage.routeName);
+                            } else {
+                              setState(() {
+                                _hasError = true;
+                              });
+                            }
+                          }
+                        },
+                  child: _isloading
+                      ? const SizedBox(
+                          height: 20,
+                          width: 20,
+                          child: CircularProgressIndicator(
+                            valueColor: AlwaysStoppedAnimation<Color>(
+                              Colors.white,
+                            ),
+                            strokeWidth: 2.5,
+                          ),
+                        )
+                      : const Text(
+                          'Log In',
+                          style: TextStyle(
+                            fontSize: 16,
+                          ),
+                        ),
                 ),
               ),
               const SizedBox(

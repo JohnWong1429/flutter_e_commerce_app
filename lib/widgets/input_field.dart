@@ -7,6 +7,7 @@ class InputField extends StatefulWidget {
   final bool hasError;
   final Function(String?)? onChange;
   final String? errorText;
+  final bool isEnable;
 
   const InputField({
     super.key,
@@ -16,6 +17,7 @@ class InputField extends StatefulWidget {
     this.hasError = false,
     this.onChange,
     this.errorText,
+    this.isEnable = true,
   });
 
   @override
@@ -45,6 +47,7 @@ class _InputFieldState extends State<InputField> {
       children: [
         TextFormField(
           controller: _controller,
+          enabled: widget.isEnable,
           decoration: InputDecoration(
             labelText: widget.labelText,
             labelStyle: TextStyle(
