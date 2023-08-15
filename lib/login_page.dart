@@ -112,6 +112,7 @@ class _LoginPageState extends State<LoginPage> {
                     ),
                   ),
                   onPressed: () async {
+                    FocusScope.of(context).unfocus();
                     final result = await CallApi.fetchUsers(
                         _username.text, _password.text);
                     if (context.mounted && result != null) {
@@ -141,7 +142,9 @@ class _LoginPageState extends State<LoginPage> {
                       setState(() {
                         _username.text = 'kminchelle';
                         _password.text = '0lelplR';
+                        _hasError = false;
                       });
+                      FocusScope.of(context).unfocus();
                     },
                     splashColor: const Color.fromARGB(255, 232, 237, 241),
                     child: RichText(
