@@ -13,11 +13,15 @@ class CallApi {
     final url = Uri.parse('https://dummyjson.com/auth/login');
     final response = await http.post(
       url,
-      body: request,
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: jsonEncode(request),
     );
 
-    if (response.statusCode == 201) {
-      return ApiLoginUserDataModel.fromJson(json.decode(response.body));
+    if (response.statusCode == 200) {
+      return ApiLoginUserDataModel.fromJson(
+          jsonDecode(utf8.decode(response.bodyBytes)));
     } else {
       return null;
     }

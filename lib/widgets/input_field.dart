@@ -5,6 +5,8 @@ class InputField extends StatefulWidget {
   final String? labelText;
   final bool hidePassword;
   final bool hasError;
+  final Function(String?)? onChange;
+  final String? errorText;
 
   const InputField({
     super.key,
@@ -12,6 +14,8 @@ class InputField extends StatefulWidget {
     this.labelText,
     this.hidePassword = false,
     this.hasError = false,
+    this.onChange,
+    this.errorText,
   });
 
   @override
@@ -37,20 +41,56 @@ class _InputFieldState extends State<InputField> {
 
   @override
   Widget build(BuildContext context) {
-    return TextFormField(
-      controller: _controller,
-      decoration: InputDecoration(
-        labelText: widget.labelText,
-        labelStyle: const TextStyle(
-          fontSize: 20,
-          color: Colors.grey,
+    return Column(
+      children: [
+        TextFormField(
+          controller: _controller,
+          decoration: InputDecoration(
+            labelText: widget.labelText,
+            labelStyle: TextStyle(
+              fontSize: 20,
+              color: widget.hasError ? Colors.red : Colors.grey,
+            ),
+            enabledBorder: UnderlineInputBorder(
+              borderSide: BorderSide(
+                color: widget.hasError
+                    ? Colors.red
+                    : const Color.fromARGB(255, 88, 88, 88),
+              ),
+            ),
+            focusedBorder: UnderlineInputBorder(
+              borderSide: BorderSide(
+                color: widget.hasError
+                    ? Colors.red
+                    : const Color.fromARGB(255, 88, 88, 88),
+              ),
+            ),
+            contentPadding: const EdgeInsets.symmetric(
+              vertical: 10,
+            ),
+          ),
+          obscureText: widget.hidePassword,
+          cursorColor: widget.hasError
+              ? Colors.red
+              : const Color.fromARGB(255, 88, 88, 88),
+          onChanged: widget.onChange,
         ),
-        border: const UnderlineInputBorder(),
-        contentPadding: const EdgeInsets.symmetric(
-          vertical: 10,
-        ),
-      ),
-      obscureText: widget.hidePassword,
+        if (widget.hasError && widget.errorText != null) ...[
+          const SizedBox(
+            height: 6,
+          ),
+          Row(
+            children: [
+              Text(
+                widget.errorText!,
+                style: const TextStyle(
+                  color: Colors.red,
+                ),
+              ),
+            ],
+          ),
+        ]
+      ],
     );
   }
 }
