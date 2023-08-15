@@ -44,6 +44,7 @@ class _LoginPageState extends State<LoginPage> {
             fontSize: 28,
           ),
         ),
+        automaticallyImplyLeading: false,
       ),
       body: Center(
         child: SingleChildScrollView(
@@ -95,6 +96,7 @@ class _LoginPageState extends State<LoginPage> {
               ),
               SizedBox(
                 width: double.infinity,
+                height: 45,
                 child: ElevatedButton(
                   style: ButtonStyle(
                     backgroundColor: MaterialStateProperty.all(
