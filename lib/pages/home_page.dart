@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:my_e_commerce_app/pages/cart/cart_page.dart';
 import 'package:my_e_commerce_app/widgets/sidebar.dart';
-import 'package:badges/badges.dart' as badges;
+
+import '../widgets/shopping_cart_icon.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({super.key});
@@ -23,32 +23,8 @@ class HomePage extends StatelessWidget {
         ),
         centerTitle: true,
         backgroundColor: Colors.blueAccent,
-        actions: [
-          Padding(
-            padding: const EdgeInsets.only(
-              right: 8,
-            ),
-            child: IconButton(
-                onPressed: () {
-                  Navigator.of(context).pushNamed(CartPage.routeName);
-                },
-                icon: badges.Badge(
-                  badgeContent: const Text(
-                    '6',
-                    style: TextStyle(
-                      color: Colors.white,
-                      fontSize:
-                          null, //two digits = fontsize 10, one digit = null
-                    ),
-                  ),
-                  position: badges.BadgePosition.topEnd(
-                    top: -14,
-                  ),
-                  child: const Icon(
-                    Icons.shopping_cart_outlined,
-                  ),
-                )),
-          )
+        actions: const [
+          ShoppingCartIcon(),
         ],
       ),
       drawer: const SideBar(),
