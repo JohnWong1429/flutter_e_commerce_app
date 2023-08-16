@@ -167,11 +167,13 @@ class _LoginPageState extends State<LoginPage> {
                 children: [
                   InkWell(
                     onTap: () {
-                      setState(() {
-                        _username.text = 'kminchelle';
-                        _password.text = '0lelplR';
-                        _hasError = false;
-                      });
+                      _isloading
+                          ? null
+                          : setState(() {
+                              _username.text = 'kminchelle';
+                              _password.text = '0lelplR';
+                              _hasError = false;
+                            });
                       FocusScope.of(context).unfocus();
                     },
                     splashColor: const Color.fromARGB(255, 232, 237, 241),

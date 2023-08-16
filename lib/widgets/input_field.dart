@@ -67,6 +67,9 @@ class _InputFieldState extends State<InputField> {
     return Column(
       children: [
         TextFormField(
+          style: const TextStyle(
+            fontSize: 28,
+          ),
           controller: _controller,
           enabled: widget.isEnable,
           decoration: InputDecoration(
@@ -74,6 +77,7 @@ class _InputFieldState extends State<InputField> {
                 ? IconButton(
                     onPressed: () {
                       _controller.clear();
+                      FocusScope.of(context).unfocus();
                     },
                     icon: const Icon(
                       Icons.cancel,
