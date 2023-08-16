@@ -1,27 +1,27 @@
 import 'package:flutter/material.dart';
-import 'package:my_e_commerce_app/login_page.dart';
+import 'package:my_e_commerce_app/pages/login_page.dart';
+import 'package:my_e_commerce_app/widgets/sidebar.dart';
 
-class ContentPage extends StatelessWidget {
-  const ContentPage({super.key});
-  static const routeName = 'content_page';
+class HomePage extends StatelessWidget {
+  const HomePage({super.key});
+  static const routeName = 'home_page';
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         title: const Text(
-          'Content Page',
+          'Home Page',
           style: TextStyle(
             color: Colors.white,
             fontSize: 28,
           ),
         ),
-        centerTitle: true,
-        backgroundColor: Colors.blueAccent,
-        automaticallyImplyLeading: false,
-        actionsIconTheme: const IconThemeData(
+        iconTheme: const IconThemeData(
           color: Colors.white,
         ),
+        centerTitle: true,
+        backgroundColor: Colors.blueAccent,
         actions: [
           IconButton(
             onPressed: () {
@@ -33,6 +33,7 @@ class ContentPage extends StatelessWidget {
           ),
         ],
       ),
+      drawer: const SideBar(),
     );
   }
 }

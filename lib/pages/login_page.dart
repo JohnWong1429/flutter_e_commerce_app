@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:my_e_commerce_app/content_page.dart';
 import 'package:my_e_commerce_app/services/api_call.dart';
 import 'package:my_e_commerce_app/widgets/input_field.dart';
+
+import 'home_page.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({super.key});
@@ -132,7 +133,7 @@ class _LoginPageState extends State<LoginPage> {
                             });
                             if (result != null) {
                               Navigator.of(context)
-                                  .pushNamed(ContentPage.routeName);
+                                  .pushNamed(HomePage.routeName);
                             } else {
                               setState(() {
                                 _hasError = true;
