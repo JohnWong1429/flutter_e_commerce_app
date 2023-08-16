@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:my_e_commerce_app/models/api_login_user_data_model.dart';
+import 'package:my_e_commerce_app/providers/user_providers.dart';
 import 'package:my_e_commerce_app/services/api_call.dart';
 import 'package:my_e_commerce_app/widgets/input_field.dart';
+import 'package:provider/provider.dart';
 
 import 'home_page.dart';
 
@@ -131,7 +134,8 @@ class _LoginPageState extends State<LoginPage> {
                             setState(() {
                               _isloading = false;
                             });
-                            if (result != null) {
+                            if (result is ApiLoginUserDataModel) {
+                              context.read<UserProvider>().user = result;
                               Navigator.of(context)
                                   .pushNamed(HomePage.routeName);
                             } else {

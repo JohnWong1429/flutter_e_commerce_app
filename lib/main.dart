@@ -6,9 +6,20 @@ import 'package:my_e_commerce_app/pages/home_page.dart';
 import 'package:my_e_commerce_app/pages/login_page.dart';
 import 'package:my_e_commerce_app/pages/products/products_page.dart';
 import 'package:my_e_commerce_app/pages/users/user_page.dart';
+import 'package:my_e_commerce_app/providers/user_providers.dart';
+import 'package:provider/provider.dart';
 
 void main() {
-  runApp(const KeyboardVisibilityProvider(child: MyApp()));
+  runApp(
+    KeyboardVisibilityProvider(
+      child: MultiProvider(
+        providers: [
+          ChangeNotifierProvider(create: (context) => UserProvider()),
+        ],
+        child: const MyApp(),
+      ),
+    ),
+  );
 }
 
 class MyApp extends StatelessWidget {

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:my_e_commerce_app/pages/cart_page.dart';
+import 'package:my_e_commerce_app/pages/cart/cart_page.dart';
 import 'package:my_e_commerce_app/widgets/sidebar.dart';
 import 'package:badges/badges.dart' as badges;
 

@@ -1,54 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:my_e_commerce_app/models/api_login_user_data_model.dart';
 import 'package:provider/provider.dart';
 
 class UserProvider extends ChangeNotifier implements ReassembleHandler {
-  int? _id;
-  String? _username;
-  String? _email;
-  String? _firstName;
-  String? _lastName;
-  String? _gender;
-  String? _image;
+  ApiLoginUserDataModel? _user;
 
-  int? get id => _id;
-  set id(int? value) {
-    _id = value;
-    notifyListeners();
-  }
-
-  String? get username => _username;
-  set usename(String? value) {
-    _username = value;
-    notifyListeners();
-  }
-
-  String? get email => _email;
-  set email(String? value) {
-    _email = value;
-    notifyListeners();
-  }
-
-  String? get firstName => _firstName;
-  set firstName(String? value) {
-    _firstName = value;
-    notifyListeners();
-  }
-
-  String? get lastName => _lastName;
-  set lastName(String? value) {
-    _lastName = value;
-    notifyListeners();
-  }
-
-  String? get gender => _gender;
-  set gender(String? value) {
-    _gender = value;
-    notifyListeners();
-  }
-
-  String? get image => _image;
-  set image(String? value) {
-    _image = value;
+  ApiLoginUserDataModel? get user => _user;
+  set user(ApiLoginUserDataModel? value) {
+    _user = value;
     notifyListeners();
   }
 
