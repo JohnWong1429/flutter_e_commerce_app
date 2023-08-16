@@ -4,6 +4,9 @@ import 'package:my_e_commerce_app/pages/cart/cart_page.dart';
 import 'package:my_e_commerce_app/pages/home_page.dart';
 import 'package:my_e_commerce_app/pages/login_page.dart';
 import 'package:my_e_commerce_app/pages/products/products_page.dart';
+import 'package:my_e_commerce_app/pages/users/user_page.dart';
+import 'package:my_e_commerce_app/providers/user_providers.dart';
+import 'package:provider/provider.dart';
 
 class SideBar extends StatelessWidget {
   const SideBar({super.key});
@@ -17,8 +20,52 @@ class SideBar extends StatelessWidget {
             child: ListView(
               shrinkWrap: true,
               children: [
-                const DrawerHeader(
-                  child: Text('User Info'),
+                DrawerHeader(
+                  decoration: const BoxDecoration(
+                    color: Colors.blueAccent,
+                  ),
+                  child: Column(
+                    children: [
+                      ClipOval(
+                        child: Container(
+                          width: 100,
+                          height: 100,
+                          color: Colors.white,
+                          child: InkWell(
+                            onTap: () {
+                              Navigator.of(context).pop();
+                              Navigator.of(context)
+                                  .pushNamed(UserPage.routeName);
+                            },
+                            child: Image.network(
+                                context.read<UserProvider>().user?.image ?? ''),
+                          ),
+                        ),
+                      ),
+                      const SizedBox(
+                        height: 10,
+                      ),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                        children: [
+                          Text(
+                            'id: ${context.read<UserProvider>().user?.id}',
+                            style: const TextStyle(
+                              fontSize: 14,
+                              color: Colors.white,
+                            ),
+                          ),
+                          Text(
+                            'User: ${context.read<UserProvider>().user?.username}',
+                            style: const TextStyle(
+                              fontSize: 14,
+                              color: Colors.white,
+                            ),
+                          ),
+                        ],
+                      )
+                    ],
+                  ),
                 ),
                 ListTile(
                   title: const Text('Home'),
@@ -71,6 +118,7 @@ class SideBar extends StatelessWidget {
             },
             leading: const Icon(
               Icons.logout,
+              color: Color.fromARGB(255, 190, 13, 0),
             ),
           ),
           const SizedBox(

@@ -11,13 +11,8 @@ import 'package:provider/provider.dart';
 
 void main() {
   runApp(
-    KeyboardVisibilityProvider(
-      child: MultiProvider(
-        providers: [
-          ChangeNotifierProvider(create: (context) => UserProvider()),
-        ],
-        child: const MyApp(),
-      ),
+    const KeyboardVisibilityProvider(
+      child: MyApp(),
     ),
   );
 }
@@ -27,22 +22,29 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return KeyboardDismissOnTap(
-      child: MaterialApp(
-        debugShowCheckedModeBanner: false,
-        theme: ThemeData(
-          useMaterial3: true,
-          colorSchemeSeed: Colors.blue,
+    return MultiProvider(
+      providers: [
+        ChangeNotifierProvider(
+          create: (context) => UserProvider(),
         ),
-        home: const LoginPage(),
-        routes: {
-          HomePage.routeName: (_) => const HomePage(),
-          LoginPage.routeName: (_) => const LoginPage(),
-          CartPage.routeName: (_) => const CartPage(),
-          UserPage.routeName: (_) => const UserPage(),
-          AboutUsPage.routeName: (_) => const AboutUsPage(),
-          ProductsPage.routeName: (_) => const ProductsPage(),
-        },
+      ],
+      child: KeyboardDismissOnTap(
+        child: MaterialApp(
+          debugShowCheckedModeBanner: false,
+          theme: ThemeData(
+            useMaterial3: true,
+            colorSchemeSeed: Colors.blue,
+          ),
+          home: const LoginPage(),
+          routes: {
+            HomePage.routeName: (_) => const HomePage(),
+            LoginPage.routeName: (_) => const LoginPage(),
+            CartPage.routeName: (_) => const CartPage(),
+            UserPage.routeName: (_) => const UserPage(),
+            AboutUsPage.routeName: (_) => const AboutUsPage(),
+            ProductsPage.routeName: (_) => const ProductsPage(),
+          },
+        ),
       ),
     );
   }
