@@ -1,5 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:my_e_commerce_app/pages/about_us_page.dart';
+import 'package:my_e_commerce_app/pages/cart/cart_page.dart';
+import 'package:my_e_commerce_app/pages/home_page.dart';
 import 'package:my_e_commerce_app/pages/login_page.dart';
+import 'package:my_e_commerce_app/pages/products/products_page.dart';
 
 class SideBar extends StatelessWidget {
   const SideBar({super.key});
@@ -12,21 +16,45 @@ class SideBar extends StatelessWidget {
           Expanded(
             child: ListView(
               shrinkWrap: true,
-              children: const [
-                DrawerHeader(
+              children: [
+                const DrawerHeader(
                   child: Text('User Info'),
                 ),
                 ListTile(
-                  title: Text('Home'),
+                  title: const Text('Home'),
+                  onTap: () {
+                    transitPage(
+                      context,
+                      HomePage.routeName,
+                    );
+                  },
                 ),
                 ListTile(
-                  title: Text('Products'),
+                  title: const Text('Products'),
+                  onTap: () {
+                    transitPage(
+                      context,
+                      ProductsPage.routeName,
+                    );
+                  },
                 ),
                 ListTile(
-                  title: Text('Cart'),
+                  title: const Text('Cart'),
+                  onTap: () {
+                    transitPage(
+                      context,
+                      CartPage.routeName,
+                    );
+                  },
                 ),
                 ListTile(
-                  title: Text('About Us'),
+                  title: const Text('About Us'),
+                  onTap: () {
+                    transitPage(
+                      context,
+                      AboutUsPage.routeName,
+                    );
+                  },
                 ),
               ],
             ),
@@ -51,5 +79,10 @@ class SideBar extends StatelessWidget {
         ],
       ),
     );
+  }
+
+  void transitPage(BuildContext context, String route) {
+    Navigator.pop(context);
+    Navigator.of(context).pushNamed(route);
   }
 }
