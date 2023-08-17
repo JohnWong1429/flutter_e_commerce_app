@@ -30,11 +30,13 @@ class _HomePageState extends State<HomePage> {
       _isLoading = true;
     });
     for (int id in idList) {
-      final result = await ApiCall.fetchSingleProduct(id);
+      if (id > 0) {
+        final result = await ApiCall.fetchSingleProduct(id);
 
-      if (context.mounted) {
-        if (result is ApiProductsDataModelProducts) {
-          context.read<ProductsProvider>().addProduct(result);
+        if (context.mounted) {
+          if (result is ApiProductsDataModelProducts) {
+            context.read<ProductsProvider>().addProduct(result);
+          }
         }
       }
     }
