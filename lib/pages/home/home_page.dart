@@ -22,7 +22,7 @@ class _HomePageState extends State<HomePage> {
   @override
   void initState() {
     super.initState();
-    _fetchSingleProduct([1, 2, 3, 4]);
+    _fetchSingleProduct(List<int>.generate(8, (index) => index + 1));
   }
 
   Future<void> _fetchSingleProduct(List<int> idList) async {
@@ -86,7 +86,13 @@ class _HomePageState extends State<HomePage> {
           ? const Center(
               child: CircularProgressIndicator(),
             )
-          : const HomePageHeroSection(),
+          : const SingleChildScrollView(
+              child: Column(
+                children: [
+                  HomePageHeroSection(),
+                ],
+              ),
+            ),
     );
   }
 }

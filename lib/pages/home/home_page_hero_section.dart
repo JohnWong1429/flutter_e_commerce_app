@@ -11,8 +11,8 @@ class HomePageHeroSection extends StatelessWidget {
     return Column(
       children: [
         Padding(
-          padding: const EdgeInsets.all(
-            10,
+          padding: const EdgeInsets.symmetric(
+            vertical: 10,
           ),
           child: CarouselSlider(
             options: CarouselOptions(
@@ -22,7 +22,10 @@ class HomePageHeroSection extends StatelessWidget {
               initialPage: 0,
               autoPlay: true,
             ),
-            items: context.read<ProductsProvider>().products.map((e) {
+            items: (context.read<ProductsProvider>().products.length >= 4
+                    ? context.read<ProductsProvider>().products.sublist(0, 4)
+                    : context.read<ProductsProvider>().products)
+                .map((e) {
               return Builder(builder: (BuildContext context) {
                 return SizedBox(
                   width: MediaQuery.of(context).size.width,
@@ -32,6 +35,32 @@ class HomePageHeroSection extends StatelessWidget {
             }).toList(),
           ),
         ),
+        if (context.read<ProductsProvider>().products.length >= 8) ...[
+          Padding(
+            padding: const EdgeInsets.symmetric(
+              vertical: 10,
+            ),
+            child: CarouselSlider(
+              options: CarouselOptions(
+                height: 300,
+                aspectRatio: 16 / 9,
+                viewportFraction: 1,
+                initialPage: 0,
+                autoPlay: true,
+                reverse: true,
+              ),
+              items: (context.read<ProductsProvider>().products.sublist(4, 8))
+                  .map((e) {
+                return Builder(builder: (BuildContext context) {
+                  return SizedBox(
+                    width: MediaQuery.of(context).size.width,
+                    child: Image.network(e?.images?[0]),
+                  );
+                });
+              }).toList(),
+            ),
+          ),
+        ]
       ],
     );
   }
