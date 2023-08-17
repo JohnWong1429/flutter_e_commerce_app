@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:my_e_commerce_app/models/api_products_data_mode.dart';
+import 'package:my_e_commerce_app/models/api_products_data_model.dart';
 import 'package:my_e_commerce_app/pages/home/home_page_hero_section.dart';
 import 'package:my_e_commerce_app/providers/products_providers.dart';
 import 'package:my_e_commerce_app/services/api_call.dart';
@@ -22,24 +22,41 @@ class _HomePageState extends State<HomePage> {
   @override
   void initState() {
     super.initState();
-    _fetchAllProducts();
+    _fetchSingleProduct(1);
+    _fetchSingleProduct(2);
   }
 
-  Future<void> _fetchAllProducts() async {
+  Future<void> _fetchSingleProduct(int id) async {
     setState(() {
       _isLoading = true;
     });
-    final result = await ApiCall.fetchAllProducts();
+    final result = await ApiCall.fetchSingleProduct(id);
 
     if (context.mounted) {
       setState(() {
         _isLoading = false;
       });
-      if (result is ApiProductsDataModel) {
-        context.read<ProductsProvider>().allProducts = result;
+      if (result is ApiProductsDataModelProducts) {
+        context.read<ProductsProvider>().addProduct(result);
       }
     }
   }
+
+  // Future<void> _fetchAllProducts() async {
+  //   setState(() {
+  //     _isLoading = true;
+  //   });
+  //   final result = await ApiCall.fetchAllProducts();
+
+  //   if (context.mounted) {
+  //     setState(() {
+  //       _isLoading = false;
+  //     });
+  //     if (result is ApiProductsDataModel) {
+  //       context.read<ProductsProvider>().allProducts = result;
+  //     }
+  //   }
+  // }
 
   @override
   Widget build(BuildContext context) {

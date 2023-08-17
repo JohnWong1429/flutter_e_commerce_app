@@ -13,11 +13,8 @@ class HomePageHeroSection extends StatelessWidget {
           padding: const EdgeInsets.all(
             10,
           ),
-          child: Image.network(context
-              .read<ProductsProvider>()
-              .allProducts
-              ?.products?[1]
-              .images?[0]),
+          child: Image.network(
+              context.read<ProductsProvider>().products[0]?.images?[0]),
         ),
       ],
     );

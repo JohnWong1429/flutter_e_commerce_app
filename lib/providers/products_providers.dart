@@ -1,13 +1,25 @@
 import 'package:flutter/material.dart';
-import 'package:my_e_commerce_app/models/api_products_data_mode.dart';
+import 'package:my_e_commerce_app/models/api_products_data_model.dart';
 import 'package:provider/provider.dart';
 
 class ProductsProvider extends ChangeNotifier implements ReassembleHandler {
   ApiProductsDataModel? _allProducts;
+  final List<ApiProductsDataModelProducts?> _products = [];
 
   ApiProductsDataModel? get allProducts => _allProducts;
   set allProducts(ApiProductsDataModel? value) {
     _allProducts = value;
+    notifyListeners();
+  }
+
+  List<ApiProductsDataModelProducts?> get products => _products;
+  void addProduct(ApiProductsDataModelProducts? product) {
+    _products.add(product);
+    notifyListeners();
+  }
+
+  void removeAllProducts() {
+    _products.clear();
     notifyListeners();
   }
 
