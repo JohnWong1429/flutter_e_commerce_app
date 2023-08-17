@@ -22,24 +22,25 @@ class _HomePageState extends State<HomePage> {
   @override
   void initState() {
     super.initState();
-    _fetchSingleProduct(1);
-    _fetchSingleProduct(2);
+    _fetchSingleProduct([1, 2]);
   }
 
-  Future<void> _fetchSingleProduct(int id) async {
+  Future<void> _fetchSingleProduct(List<int> idList) async {
     setState(() {
       _isLoading = true;
     });
-    final result = await ApiCall.fetchSingleProduct(id);
+    for (int id in idList) {
+      final result = await ApiCall.fetchSingleProduct(id);
 
-    if (context.mounted) {
-      setState(() {
-        _isLoading = false;
-      });
-      if (result is ApiProductsDataModelProducts) {
-        context.read<ProductsProvider>().addProduct(result);
+      if (context.mounted) {
+        if (result is ApiProductsDataModelProducts) {
+          context.read<ProductsProvider>().addProduct(result);
+        }
       }
     }
+    setState(() {
+      _isLoading = false;
+    });
   }
 
   // Future<void> _fetchAllProducts() async {
