@@ -25,6 +25,7 @@ class ShoppingCartIcon extends StatelessWidget {
               fontSize: null, //two digits = fontsize 10, one digit = null
             ),
           ),
+          showBadge: true, //if 0, false
           position: badges.BadgePosition.topEnd(
             top: -14,
           ),
