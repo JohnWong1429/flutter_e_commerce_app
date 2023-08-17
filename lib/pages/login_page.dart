@@ -5,7 +5,7 @@ import 'package:my_e_commerce_app/services/api_call.dart';
 import 'package:my_e_commerce_app/widgets/input_field.dart';
 import 'package:provider/provider.dart';
 
-import 'home_page.dart';
+import 'home/home_page.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({super.key});
@@ -128,7 +128,7 @@ class _LoginPageState extends State<LoginPage> {
                             _isloading = true;
                           });
                           FocusScope.of(context).unfocus();
-                          final result = await CallApi.fetchUsers(
+                          final result = await ApiCall.fetchUsers(
                               _username.text, _password.text);
                           if (context.mounted) {
                             setState(() {

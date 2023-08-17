@@ -2,8 +2,9 @@ import 'dart:convert';
 
 import 'package:http/http.dart' as http;
 import 'package:my_e_commerce_app/models/api_login_user_data_model.dart';
+import 'package:my_e_commerce_app/models/api_products_data_mode.dart';
 
-class CallApi {
+class ApiCall {
   static Future fetchUsers(String username, String password) async {
     Map<String, dynamic> request = {
       'username': username, // kminchelle
@@ -21,6 +22,23 @@ class CallApi {
 
     if (response.statusCode == 200) {
       return ApiLoginUserDataModel.fromJson(
+          jsonDecode(utf8.decode(response.bodyBytes)));
+    } else {
+      return null;
+    }
+  }
+
+  static Future fetchAllProducts() async {
+    final url = Uri.parse('https://dummyjson.com/products');
+    final response = await http.get(
+      url,
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    );
+
+    if (response.statusCode == 200) {
+      return ApiProductsDataModel.fromJson(
           jsonDecode(utf8.decode(response.bodyBytes)));
     } else {
       return null;

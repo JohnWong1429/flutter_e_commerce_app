@@ -2,10 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_keyboard_visibility/flutter_keyboard_visibility.dart';
 import 'package:my_e_commerce_app/pages/about_us_page.dart';
 import 'package:my_e_commerce_app/pages/cart/cart_page.dart';
-import 'package:my_e_commerce_app/pages/home_page.dart';
+import 'package:my_e_commerce_app/pages/home/home_page.dart';
 import 'package:my_e_commerce_app/pages/login_page.dart';
 import 'package:my_e_commerce_app/pages/products/products_page.dart';
 import 'package:my_e_commerce_app/pages/users/user_page.dart';
+import 'package:my_e_commerce_app/providers/products_providers.dart';
 import 'package:my_e_commerce_app/providers/user_providers.dart';
 import 'package:provider/provider.dart';
 
@@ -26,6 +27,9 @@ class MyApp extends StatelessWidget {
       providers: [
         ChangeNotifierProvider(
           create: (context) => UserProvider(),
+        ),
+        ChangeNotifierProvider(
+          create: (context) => ProductsProvider(),
         ),
       ],
       child: KeyboardDismissOnTap(
