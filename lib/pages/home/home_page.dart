@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:my_e_commerce_app/models/api_products_data_model.dart';
 import 'package:my_e_commerce_app/pages/home/home_page_hero_section.dart';
+import 'package:my_e_commerce_app/pages/products/products_page.dart';
 import 'package:my_e_commerce_app/providers/products_providers.dart';
 import 'package:my_e_commerce_app/services/api_call.dart';
 import 'package:my_e_commerce_app/widgets/sidebar.dart';
@@ -90,10 +91,56 @@ class _HomePageState extends State<HomePage> {
           ? const Center(
               child: CircularProgressIndicator(),
             )
-          : const SingleChildScrollView(
+          : SingleChildScrollView(
               child: Column(
                 children: [
-                  HomePageHeroSection(),
+                  const HomePageHeroSection(),
+                  const SizedBox(
+                    height: 10,
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.symmetric(
+                      horizontal: 10,
+                    ),
+                    child: SizedBox(
+                      width: double.infinity,
+                      height: 56,
+                      child: ElevatedButton(
+                        onPressed: () {
+                          Navigator.of(context)
+                              .pushNamed(ProductsPage.routeName);
+                        },
+                        style: ButtonStyle(
+                          backgroundColor: MaterialStateProperty.all(
+                            Colors.blueAccent,
+                          ),
+                          foregroundColor: MaterialStateProperty.all(
+                            Colors.white,
+                          ),
+                          overlayColor: MaterialStateProperty.all(
+                            Colors.grey,
+                          ),
+                          shape:
+                              MaterialStateProperty.all<RoundedRectangleBorder>(
+                            RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(
+                                40,
+                              ),
+                            ),
+                          ),
+                        ),
+                        child: const Text(
+                          'START SHOPPING',
+                          style: TextStyle(
+                            fontSize: 18,
+                          ),
+                        ),
+                      ),
+                    ),
+                  ),
+                  const SizedBox(
+                    height: 40,
+                  ),
                 ],
               ),
             ),

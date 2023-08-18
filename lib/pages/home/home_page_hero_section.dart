@@ -30,8 +30,9 @@ class HomePageHeroSection extends StatelessWidget {
                     TextSpan(
                       text: 'Featured Products',
                       style: TextStyle(
-                        color: Colors.black,
+                        color: Color.fromARGB(180, 0, 0, 0),
                         fontSize: 24,
+                        fontWeight: FontWeight.bold,
                       ),
                     ),
                   ],
@@ -101,8 +102,9 @@ class HomePageHeroSection extends StatelessWidget {
                       TextSpan(
                         text: 'Trending Products',
                         style: TextStyle(
-                          color: Colors.black,
+                          color: Color.fromARGB(180, 0, 0, 0),
                           fontSize: 24,
+                          fontWeight: FontWeight.bold,
                         ),
                       ),
                     ],
