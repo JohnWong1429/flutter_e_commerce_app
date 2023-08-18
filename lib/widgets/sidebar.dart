@@ -51,14 +51,14 @@ class SideBar extends StatelessWidget {
                           Text(
                             'id: ${context.read<UserProvider>().user?.id}',
                             style: const TextStyle(
-                              fontSize: 14,
+                              fontSize: 16,
                               color: Colors.white,
                             ),
                           ),
                           Text(
                             'User: ${context.read<UserProvider>().user?.username}',
                             style: const TextStyle(
-                              fontSize: 14,
+                              fontSize: 16,
                               color: Colors.white,
                             ),
                           ),
@@ -68,7 +68,12 @@ class SideBar extends StatelessWidget {
                   ),
                 ),
                 ListTile(
-                  title: const Text('Home'),
+                  title: const Text(
+                    'Home',
+                    style: TextStyle(
+                      fontSize: 20,
+                    ),
+                  ),
                   onTap: () {
                     transitPage(
                       context,
@@ -77,7 +82,12 @@ class SideBar extends StatelessWidget {
                   },
                 ),
                 ListTile(
-                  title: const Text('Products'),
+                  title: const Text(
+                    'Products',
+                    style: TextStyle(
+                      fontSize: 20,
+                    ),
+                  ),
                   onTap: () {
                     transitPage(
                       context,
@@ -86,7 +96,12 @@ class SideBar extends StatelessWidget {
                   },
                 ),
                 ListTile(
-                  title: const Text('Cart'),
+                  title: const Text(
+                    'Cart',
+                    style: TextStyle(
+                      fontSize: 20,
+                    ),
+                  ),
                   onTap: () {
                     transitPage(
                       context,
@@ -95,7 +110,12 @@ class SideBar extends StatelessWidget {
                   },
                 ),
                 ListTile(
-                  title: const Text('About Us'),
+                  title: const Text(
+                    'About Us',
+                    style: TextStyle(
+                      fontSize: 20,
+                    ),
+                  ),
                   onTap: () {
                     transitPage(
                       context,
