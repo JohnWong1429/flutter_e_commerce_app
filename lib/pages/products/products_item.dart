@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:my_e_commerce_app/widgets/rating.dart';
 
-class ProductsItem extends StatefulWidget {
+class ProductsItem extends StatelessWidget {
   final bool isGridView;
   final String image;
   final String title;
   final String? desc;
+  final double rating;
 
   const ProductsItem({
     super.key,
@@ -12,13 +14,9 @@ class ProductsItem extends StatefulWidget {
     required this.title,
     required this.isGridView,
     this.desc,
+    required this.rating,
   });
 
-  @override
-  State<ProductsItem> createState() => _ProductsItemState();
-}
-
-class _ProductsItemState extends State<ProductsItem> {
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -44,7 +42,7 @@ class _ProductsItemState extends State<ProductsItem> {
               child: SizedBox(
                 width: double.infinity,
                 child: Image.network(
-                  widget.image,
+                  image,
                   fit: BoxFit.fitWidth,
                 ),
               ),
@@ -54,20 +52,20 @@ class _ProductsItemState extends State<ProductsItem> {
             flex: 4,
             child: Padding(
               padding: EdgeInsets.symmetric(
-                horizontal: widget.isGridView ? 6 : 12,
+                horizontal: isGridView ? 6 : 12,
               ),
               child: Column(
                 children: [
                   SizedBox(
-                    height: widget.isGridView ? 6 : 10,
+                    height: isGridView ? 6 : 10,
                   ),
                   Row(
                     children: [
                       Flexible(
                         child: Text(
-                          widget.title,
+                          title,
                           style: TextStyle(
-                            fontSize: widget.isGridView ? 12 : 24,
+                            fontSize: isGridView ? 12 : 24,
                           ),
                         ),
                       ),
@@ -76,12 +74,12 @@ class _ProductsItemState extends State<ProductsItem> {
                   const SizedBox(
                     height: 6,
                   ),
-                  if (widget.desc != null && !widget.isGridView) ...[
+                  if (desc != null && !isGridView) ...[
                     Row(
                       children: [
                         Flexible(
                           child: Text(
-                            widget.desc!,
+                            desc!,
                             style: const TextStyle(
                               fontSize: 12,
                               color: Colors.grey,
@@ -91,6 +89,13 @@ class _ProductsItemState extends State<ProductsItem> {
                       ],
                     ),
                   ],
+                  Row(
+                    children: [
+                      Rating(
+                        rating: rating,
+                      ),
+                    ],
+                  ),
                 ],
               ),
             ),

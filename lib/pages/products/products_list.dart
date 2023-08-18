@@ -65,6 +65,7 @@ class _ProductsListState extends State<ProductsList> {
                           image: product.thumbnail ?? '',
                           title: product.title ?? 'Products Title',
                           desc: product.description,
+                          rating: product.rating ?? 0,
                         ))
                     .toList() ??
                 [],
