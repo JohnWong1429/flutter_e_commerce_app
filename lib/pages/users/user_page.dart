@@ -13,7 +13,7 @@ class UserPage extends StatelessWidget {
       appBar: AppBar(
         backgroundColor: Colors.blueAccent,
         title: const Text(
-          'User Page',
+          'Personal Page',
           style: TextStyle(
             color: Colors.white,
             fontSize: 28,

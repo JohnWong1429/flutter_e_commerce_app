@@ -10,7 +10,7 @@ class CartPage extends StatelessWidget {
       appBar: AppBar(
         backgroundColor: Colors.blueAccent,
         title: const Text(
-          'Cart Page',
+          'My Cart',
           style: TextStyle(
             color: Colors.white,
             fontSize: 28,

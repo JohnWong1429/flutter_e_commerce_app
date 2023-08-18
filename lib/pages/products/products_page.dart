@@ -10,7 +10,7 @@ class ProductsPage extends StatelessWidget {
       appBar: AppBar(
         backgroundColor: Colors.blueAccent,
         title: const Text(
-          'Products Page',
+          'Products',
           style: TextStyle(
             color: Colors.white,
             fontSize: 28,

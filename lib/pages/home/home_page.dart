@@ -68,10 +68,12 @@ class _HomePageState extends State<HomePage> {
     return Scaffold(
       appBar: AppBar(
         title: const Text(
-          'Home Page',
+          'RIW',
           style: TextStyle(
             color: Colors.white,
             fontSize: 28,
+            letterSpacing: 4,
+            fontWeight: FontWeight.w900,
           ),
         ),
         iconTheme: const IconThemeData(
