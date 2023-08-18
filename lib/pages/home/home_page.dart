@@ -48,22 +48,6 @@ class _HomePageState extends State<HomePage> {
     });
   }
 
-  // Future<void> _fetchAllProducts() async {
-  //   setState(() {
-  //     _isLoading = true;
-  //   });
-  //   final result = await ApiCall.fetchAllProducts();
-
-  //   if (context.mounted) {
-  //     setState(() {
-  //       _isLoading = false;
-  //     });
-  //     if (result is ApiProductsDataModel) {
-  //       context.read<ProductsProvider>().allProducts = result;
-  //     }
-  //   }
-  // }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
