@@ -22,7 +22,9 @@ class _HomePageState extends State<HomePage> {
   @override
   void initState() {
     super.initState();
-    _fetchSingleProduct(List<int>.generate(8, (index) => index + 1));
+    if (context.read<ProductsProvider>().products.length < 8) {
+      _fetchSingleProduct(List<int>.generate(8, (index) => index + 1));
+    }
   }
 
   Future<void> _fetchSingleProduct(List<int> idList) async {
@@ -93,6 +95,7 @@ class _HomePageState extends State<HomePage> {
                 ],
               ),
             ),
+      backgroundColor: const Color.fromARGB(255, 247, 240, 225),
     );
   }
 }
