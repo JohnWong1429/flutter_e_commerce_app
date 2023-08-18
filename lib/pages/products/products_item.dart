@@ -1,10 +1,17 @@
 import 'package:flutter/material.dart';
 
 class ProductsItem extends StatefulWidget {
+  final bool isGridView;
   final String image;
+  final String title;
+  final String? desc;
+
   const ProductsItem({
     super.key,
     required this.image,
+    required this.title,
+    required this.isGridView,
+    this.desc,
   });
 
   @override
@@ -16,9 +23,16 @@ class _ProductsItemState extends State<ProductsItem> {
   Widget build(BuildContext context) {
     return Container(
       decoration: BoxDecoration(
-        border: Border.all(),
-        borderRadius: BorderRadius.circular(16),
-      ),
+          borderRadius: BorderRadius.circular(16),
+          color: Colors.white,
+          boxShadow: [
+            BoxShadow(
+              color: Colors.grey.withOpacity(0.5),
+              spreadRadius: 1,
+              blurRadius: 4,
+              offset: const Offset(0, 3),
+            )
+          ]),
       child: Column(
         children: [
           Expanded(
@@ -36,19 +50,49 @@ class _ProductsItemState extends State<ProductsItem> {
               ),
             ),
           ),
-          const Expanded(
+          Expanded(
             flex: 4,
-            child: Row(
-              children: [
-                Divider(
-                  height: 2,
-                  thickness: 2,
-                ),
-                Text('123'),
-                Text('123'),
-                Text('123'),
-                Text('123'),
-              ],
+            child: Padding(
+              padding: EdgeInsets.symmetric(
+                horizontal: widget.isGridView ? 6 : 12,
+              ),
+              child: Column(
+                children: [
+                  SizedBox(
+                    height: widget.isGridView ? 6 : 10,
+                  ),
+                  Row(
+                    children: [
+                      Flexible(
+                        child: Text(
+                          widget.title,
+                          style: TextStyle(
+                            fontSize: widget.isGridView ? 12 : 24,
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                  const SizedBox(
+                    height: 6,
+                  ),
+                  if (widget.desc != null && !widget.isGridView) ...[
+                    Row(
+                      children: [
+                        Flexible(
+                          child: Text(
+                            widget.desc!,
+                            style: const TextStyle(
+                              fontSize: 12,
+                              color: Colors.grey,
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ],
+                ],
+              ),
             ),
           ),
         ],

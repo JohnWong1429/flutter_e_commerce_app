@@ -54,14 +54,17 @@ class _ProductsListState extends State<ProductsList> {
               vertical: 12.0,
             ),
             crossAxisCount: _isGridView ? 2 : 1,
-            mainAxisSpacing: 12,
+            mainAxisSpacing: _isGridView ? 12 : 24,
             crossAxisSpacing: 12,
             children: context
                     .read<ProductsProvider>()
                     .allProducts
                     ?.products
                     ?.map((product) => ProductsItem(
-                          image: product.images?[0],
+                          isGridView: _isGridView,
+                          image: product.thumbnail ?? '',
+                          title: product.title ?? 'Products Title',
+                          desc: product.description,
                         ))
                     .toList() ??
                 [],
