@@ -68,6 +68,8 @@ class _ProductsListState extends State<ProductsList> {
                           rating: product.rating ?? 0,
                           brand: product.brand,
                           category: product.category,
+                          price: product.price ?? 9999,
+                          discountPercentage: product.discountPercentage,
                         ))
                     .toList() ??
                 [],

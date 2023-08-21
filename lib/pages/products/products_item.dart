@@ -9,6 +9,8 @@ class ProductsItem extends StatelessWidget {
   final double rating;
   final String? brand;
   final String? category;
+  final int price;
+  final double? discountPercentage;
 
   const ProductsItem({
     super.key,
@@ -19,7 +21,14 @@ class ProductsItem extends StatelessWidget {
     required this.rating,
     this.brand,
     this.category,
+    required this.price,
+    this.discountPercentage,
   });
+
+  double dicountedPrice(int price, double discount) {
+    final newPrice = price * ((100 - discount) / 100);
+    return newPrice;
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -112,6 +121,9 @@ class ProductsItem extends StatelessWidget {
                         ],
                       ),
                       if (isGridView) ...[
+                        const SizedBox(
+                          height: 2,
+                        ),
                         Row(
                           children: [
                             InkWell(
@@ -185,7 +197,95 @@ class ProductsItem extends StatelessWidget {
                       ],
                     ),
                   ),
-                ]
+                ],
+                if (!isGridView) ...[
+                  Positioned(
+                    bottom: 45,
+                    right: 10,
+                    child: Container(
+                      color: Colors.transparent,
+                      child: discountPercentage == null
+                          ? Row(
+                              children: [
+                                Text(
+                                  'USD ${price.toStringAsFixed(2)}',
+                                  style: TextStyle(
+                                    fontSize: 24,
+                                    fontWeight: FontWeight.bold,
+                                    color: Colors.grey[700],
+                                  ),
+                                ),
+                              ],
+                            )
+                          : Column(
+                              crossAxisAlignment: CrossAxisAlignment.end,
+                              children: [
+                                Text(
+                                  'USD ${price.toStringAsFixed(2)}',
+                                  style: TextStyle(
+                                    height: 0.5,
+                                    decoration: TextDecoration.lineThrough,
+                                    decorationThickness: 1.5,
+                                    color: Colors.grey[700],
+                                  ),
+                                ),
+                                Text(
+                                  'USD ${(dicountedPrice(price, discountPercentage!)).toStringAsFixed(2)}',
+                                  style: TextStyle(
+                                    fontSize: 24,
+                                    fontWeight: FontWeight.bold,
+                                    color: Colors.green[600],
+                                  ),
+                                ),
+                              ],
+                            ),
+                    ),
+                  ),
+                ] else ...[
+                  Positioned(
+                    bottom: 4,
+                    right: 10,
+                    child: Container(
+                      color: Colors.transparent,
+                      child: discountPercentage == null
+                          ? Row(
+                              children: [
+                                Text(
+                                  'USD ${price.toStringAsFixed(2)}',
+                                  style: TextStyle(
+                                    fontSize: 16,
+                                    fontWeight: FontWeight.bold,
+                                    color: Colors.grey[700],
+                                  ),
+                                ),
+                              ],
+                            )
+                          : Column(
+                              crossAxisAlignment: CrossAxisAlignment.end,
+                              children: [
+                                Text(
+                                  'USD ${price.toStringAsFixed(2)}',
+                                  style: TextStyle(
+                                    fontSize: 12,
+                                    height: 0.5,
+                                    decoration: TextDecoration.lineThrough,
+                                    decorationThickness: 1.5,
+                                    color: Colors.grey[700],
+                                  ),
+                                ),
+                                Text(
+                                  'USD ${(dicountedPrice(price, discountPercentage!)).toStringAsFixed(2)}',
+                                  style: TextStyle(
+                                    fontSize: 16,
+                                    fontWeight: FontWeight.bold,
+                                    color: Colors.green[600],
+                                  ),
+                                ),
+                              ],
+                            ),
+                    ),
+                  ),
+                ],
               ],
             ),
           ),
