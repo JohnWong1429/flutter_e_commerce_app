@@ -241,6 +241,14 @@ class ProductsItem extends StatelessWidget {
                             ),
                     ),
                   ),
+                  Positioned(
+                    bottom: 4,
+                    right: 10,
+                    child: IconButton(
+                      onPressed: () {},
+                      icon: const Icon(Icons.add_shopping_cart),
+                    ),
+                  ),
                 ] else ...[
                   Positioned(
                     bottom: 4,
