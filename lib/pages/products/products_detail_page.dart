@@ -35,7 +35,7 @@ class _ProductsDetailPageState extends State<ProductsDetailPage> {
     if (id > 0) {
       final result = await ApiCall.fetchSingleProduct(id);
       if (context.mounted) {
-        if (result == null) {
+        if (result != null) {
           setState(() {
             _product = result;
           });
