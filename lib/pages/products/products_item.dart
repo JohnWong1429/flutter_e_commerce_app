@@ -71,8 +71,8 @@ class ProductsItem extends StatelessWidget {
                       ),
                     ],
                   ),
-                  const SizedBox(
-                    height: 6,
+                  SizedBox(
+                    height: isGridView ? 2 : 4,
                   ),
                   if (desc != null && !isGridView) ...[
                     Row(
@@ -88,11 +88,15 @@ class ProductsItem extends StatelessWidget {
                         ),
                       ],
                     ),
+                    const SizedBox(
+                      height: 8,
+                    ),
                   ],
                   Row(
                     children: [
                       Rating(
                         rating: rating,
+                        size: isGridView ? 16 : 22,
                       ),
                     ],
                   ),
