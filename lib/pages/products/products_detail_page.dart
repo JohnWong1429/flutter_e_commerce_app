@@ -95,6 +95,7 @@ class _ProductsDetailPageState extends State<ProductsDetailPage> {
               child: CircularProgressIndicator(),
             )
           : ProductsDetailInfo(product: _product),
+      backgroundColor: const Color.fromARGB(255, 247, 240, 225),
     );
   }
 }
